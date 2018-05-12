@@ -32,6 +32,8 @@
 #include "ns3/point-to-point-net-device.h"
 #include "ns3/channel.h"
 
+#include "ns3/queue.h"
+
 namespace ns3 {
 namespace ndn {
 
@@ -53,6 +55,25 @@ public:
 
   Ptr<NetDevice>
   GetNetDevice() const;
+
+  virtual ssize_t
+  getSendQueueCapacity() const override
+  {
+    PointerValue txQueueAttribute;
+    m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
+    Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
+    // must be put into bytes mode queue
+    return txQueue->GetMaxSize().GetValue();
+  }
+
+  virtual ssize_t
+  getSendQueueLength() override
+  {
+    PointerValue txQueueAttribute;
+    m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
+    Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
+    return txQueue->GetNBytes();
+  }
 
 private:
   virtual void

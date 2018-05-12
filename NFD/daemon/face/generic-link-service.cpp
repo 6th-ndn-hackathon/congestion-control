@@ -88,9 +88,13 @@ GenericLinkService::sendLpPacket(lp::Packet&& pkt)
     m_reliability.piggyback(pkt, mtu);
   }
 
-  if (m_options.allowCongestionMarking) {
+  checkCongestionLevel(pkt);
+  /*if (m_options.allowCongestionMarking) {
     checkCongestionLevel(pkt);
   }
+  else {
+    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Congestion disabled\n";
+  }*/
 
   Transport::Packet tp(pkt.wireEncode());
   if (mtu != MTU_UNLIMITED && tp.packet.size() > static_cast<size_t>(mtu)) {
@@ -241,6 +245,9 @@ void
 GenericLinkService::checkCongestionLevel(lp::Packet& pkt)
 {
   ssize_t sendQueueLength = getTransport()->getSendQueueLength();
+
+  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueLength << "\n";
+
   // This operation requires that the transport supports retrieving current send queue length
   if (sendQueueLength < 0) {
     return;
@@ -249,7 +256,11 @@ GenericLinkService::checkCongestionLevel(lp::Packet& pkt)
   // To avoid overflowing the queue, set the congestion threshold to at least half of the send
   // queue capacity.
   size_t congestionThreshold = m_options.defaultCongestionThreshold;
-  if (getTransport()->getSendQueueCapacity() >= 0) {
+  ssize_t sendQueueCapacity = getTransport()->getSendQueueCapacity();
+
+  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueCapacity << "\n";
+
+  if (sendQueueCapacity >= 0) {
     congestionThreshold = std::min(congestionThreshold,
                                    static_cast<size_t>(getTransport()->getSendQueueCapacity()) /
                                                        DEFAULT_CONGESTION_THRESHOLD_DIVISOR);

@@ -267,7 +267,7 @@ public: // static properties
    *  \retval QUEUE_UNSUPPORTED transport does not support queue capacity retrieval
    *  \retval QUEUE_ERROR transport was unable to retrieve the queue capacity
    */
-  ssize_t
+  virtual ssize_t
   getSendQueueCapacity() const;
 
 public: // dynamic properties
