@@ -5,15 +5,23 @@
 \end{frame}
 
 
-\begin{frame}{Intro}
-
-\textbf{Four ways of congestion detection:}
-\begin{enumerate}
-\item Ethernet Queue
-\item UDP Tunnel
-\item TCP Tunnel
-\item Link Loss Detection (done)
-\end{enumerate}
+\begin{frame}{Motivation and Contribution to NDN:}
+\begin{itemize}
+\item The current NFD congestion detection doesn't work in ndnSIM, since ndnSIM doesn't use regular TCP, UDP, or Unix faces. 
+\item This project aims to fix this and evaluate the proper function of the implementation.
+\item Tasks: 
+\begin{itemize}
+\item Implement a ns-3 Queue based on CoDel that detects congestion and inserts congestion marks.
+\item Map these congestion marks onto NDNLP/ns-3 packets.
+\item Implement a ndnSIM consumer application that reacts to the congestion marks.
+\end{itemize}
+\item Additional Tasks (if time):
+\begin{itemize}
+\item Start submitting the code to Gerrit.
+\item Implement a TCP-Cubic like consumer app and compare it against the AIMD app.
+\end{itemize}
+\item Required Languages/Knowledge: C++, NFD, ndnSIM
+\end{itemize}
 
 
 \end{frame}
