@@ -71,10 +71,10 @@ ConsumerWindow::GetTypeId(void)
                     MakeBooleanAccessor(&ConsumerWindow::m_setInitialWindowOnTimeout),
                     MakeBooleanChecker())
 
-      .AddTraceSource("WindowTrace",
-                      "Window that controls how many outstanding interests are allowed",
-                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
-                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
+//      .AddTraceSource("WindowTrace",
+//                      "Window that controls how many outstanding interests are allowed",
+//                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
+//                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
       .AddTraceSource("InFlight", "Current number of outstanding interests",
                       MakeTraceSourceAccessor(&ConsumerWindow::m_inFlight),
                       "ns3::ndn::ConsumerWindow::WindowTraceCallback");
@@ -154,7 +154,7 @@ ConsumerWindow::SetSeqMax(uint32_t seqMax)
 void
 ConsumerWindow::ScheduleNextPacket()
 {
-  if (m_window == static_cast<uint32_t>(0)) {
+  if (m_window <= static_cast<uint32_t>(0)) {
     Simulator::Remove(m_sendEvent);
 
     NS_LOG_DEBUG(
@@ -184,6 +184,7 @@ ConsumerWindow::ScheduleNextPacket()
 void
 ConsumerWindow::OnData(shared_ptr<const Data> contentObject)
 {
+  std::cout << "ConsumerWindow: OnData\n";
   Consumer::OnData(contentObject);
 
   m_window = m_window + 1;
@@ -198,6 +199,7 @@ ConsumerWindow::OnData(shared_ptr<const Data> contentObject)
 void
 ConsumerWindow::OnTimeout(uint32_t sequenceNumber)
 {
+  std::cout << "ConsumerWindow: OnTimeout\n";
   if (m_inFlight > static_cast<uint32_t>(0))
     m_inFlight--;
 

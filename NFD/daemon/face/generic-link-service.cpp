@@ -42,7 +42,7 @@ GenericLinkService::Options::Options()
   , allowReassembly(false)
   , allowCongestionMarking(true)
   , baseCongestionMarkingInterval(time::milliseconds(100)) // Interval from RFC 8289 (CoDel)
-  , defaultCongestionThreshold(65536) // This default value works well for a queue capacity of 200KiB
+  , defaultCongestionThreshold(655360) // This default value works well for a queue capacity of 200KiB
   , allowSelfLearning(false)
 {
 }

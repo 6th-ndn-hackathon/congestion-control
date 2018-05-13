@@ -22,6 +22,9 @@
 
 #include "ndn-consumer-window.hpp"
 
+#include <boost/algorithm/string.hpp>
+
+
 namespace ns3 {
 namespace ndn {
 
@@ -41,8 +44,11 @@ public:
   /**
    * \brief Default constructor
    */
-  ConsumerPCON() {
-    std::cout << "Started Consumer PCON\n";
+  ConsumerPCON() :
+      CC_ALGORITHM {boost::to_upper_copy(getEnvVar("SCEN_NAME"))}
+  {
+    assert(!CC_ALGORITHM.empty());
+    std::cout << "Started Consumer PCON, Algorithm: " << CC_ALGORITHM << "\n";
     ConsumerWindow();
   }
 
@@ -62,33 +68,27 @@ private:
   void windowIncrease();
 
   void
-  cubicIncrease(){
-    assert(false);
-  };
+  cubicIncrease();
 
   void
-  cubicDecrease(){
-    assert(false);
-  };
+  cubicDecrease();
 
   void
-  bicIncrease(){
-    assert(false);
-  };
+  bicIncrease();
 
   void
-  bicDecrease(bool resetToInitial = false){
-    assert(false);
-  };
+  bicDecrease(bool resetToInitial = false);
 
+  static std::string
+  getEnvVar(const std::string& name);
 
 
 private:
   const double BETA {0.5};
+  const double CUBIC_BETA {0.8};
 
-//  double m_cwnd{2};
+  double m_cwnd{2};
   double m_sstresh{std::numeric_limits<int32_t>::max()};
-
 
   // Variables for conservative window adaptation.
   uint32_t m_highData;
@@ -96,8 +96,8 @@ private:
 
 
   /* TCP CUBIC Parameters */
-  static constexpr double CUBIC_C = 0.4;
-  static constexpr double MAX_SSTRESH = 10; /* For limited slow start */
+  static constexpr double CUBIC_C  = 0.4;
+//  static constexpr double MAX_SSTRESH  = 10; /* For limited slow start */
 
   static const shared_ptr<std::ofstream> m_osOutput;
 
@@ -114,7 +114,10 @@ private:
   static constexpr int BIC_LOW_WINDOW = 14;
 
   // Should be between 8 and 64.
-  static constexpr int BIC_MAX_INCREMENT = 16;
+  static constexpr int BIC_MAX_INCREMENT  = 16;
+
+  const std::string CC_ALGORITHM;
+
 
   // BIC variables:
   double bic_min_win; /* increase cwnd by 1 after ACKs */
