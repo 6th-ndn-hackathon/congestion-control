@@ -296,6 +296,10 @@ Forwarder::onInterestFinalize(const shared_ptr<pit::Entry>& pitEntry, bool isSat
 void
 Forwarder::onIncomingData(Face& inFace, const Data& data)
 {
+  if(data.getCongestionMark() > 0) {
+    std::cout << "Forwarder got congestion mark : " << data.getName().toUri() << "\n";
+  }
+
   // receive Data
   NFD_LOG_DEBUG("onIncomingData face=" << inFace.getId() << " data=" << data.getName());
   data.setTag(make_shared<lp::IncomingFaceIdTag>(inFace.getId()));
