@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2017.8.31)  13 MAY 2018 18:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2017.8.31)  13 MAY 2018 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1105,70 +1105,58 @@ Overfull \vbox (45.59123pt too high) detected at line 28
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./content.tex
-LaTeX Font Info:    Try loading font information for OMS+lmss on input line 22.
+LaTeX Font Info:    Try loading font information for OMS+lmss on input line 23.
 
-LaTeX Font Info:    No file OMSlmss.fd. on input line 22.
+LaTeX Font Info:    No file OMSlmss.fd. on input line 23.
 
 
 LaTeX Font Warning: Font shape `OMS/lmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 22.
+(Font)              for symbol `textbullet' on input line 23.
 
 [2
 
+] [3
+
 ]
-<figs/ns3-queue.png, id=29, 665.48625pt x 587.19376pt>
-File: figs/ns3-queue.png Graphic file (type png)
-<use figs/ns3-queue.png>
-Package pdftex.def Info: figs/ns3-queue.png  used on input line 31. on input li
-ne 31.
-Package pdftex.def Info: Requested size: 226.6685pt x 200.0pt on input line 31.
-
-
-Overfull \vbox (17.05692pt too high) detected at line 31
- []
-
-[3
-
- <./figs/ns3-queue.png>]
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 49.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 42.
  (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 49.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 42.
 
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 49.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 42.
 
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 49.
+(Font)              <12> on input line 42.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 49.
+(Font)              <8> on input line 42.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 49.
-LaTeX Font Info:    Try loading font information for U+msa on input line 49.
+(Font)              <6> on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 42.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 49.
+LaTeX Font Info:    Try loading font information for U+msb on input line 42.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <12> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 49.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 42.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <8> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 49.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 42.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <6> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 49.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 42.
  [4
 
 ] [5
@@ -1179,74 +1167,68 @@ LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <6> not available
 
 pdfTeX warning: /usr/bin/pdflatex (file ./figs/Figure_3.pdf): PDF inclusion: fo
 und PDF version <1.6>, but at most version <1.5> allowed
-<figs/Figure_3.pdf, id=53, pagebox=cropbox, 382.43977pt x 105.85347pt>
+<figs/Figure_3.pdf, id=50, pagebox=cropbox, 382.43977pt x 105.85347pt>
 File: figs/Figure_3.pdf Graphic file (type pdf)
 <use figs/Figure_3.pdf>
-Package pdftex.def Info: figs/Figure_3.pdf  used on input line 65. on input lin
-e 65.
+Package pdftex.def Info: figs/Figure_3.pdf  used on input line 58. on input lin
+e 58.
 Package pdftex.def Info: Requested size: 307.28987pt x 85.05275pt on input line
- 65.
+ 58.
 [7
 
- <./figs/Figure_3.pdf>] [8
-
-]
-<figs/cons1.png, id=74, 1830.84pt x 494.84875pt>
+ <./figs/Figure_3.pdf>]
+<figs/cons1.png, id=64, 1456.44125pt x 416.55624pt>
 File: figs/cons1.png Graphic file (type png)
 <use figs/cons1.png>
-Package pdftex.def Info: figs/cons1.png  used on input line 89. on input line 8
-9.
-Package pdftex.def Info: Requested size: 307.28987pt x 83.05096pt on input line
- 89.
-<figs/cons2.png, id=75, 1838.87pt x 481.8pt>
-File: figs/cons2.png Graphic file (type png)
-<use figs/cons2.png>
-Package pdftex.def Info: figs/cons2.png  used on input line 89. on input line 8
-9.
-Package pdftex.def Info: Requested size: 307.28987pt x 80.50809pt on input line
- 89.
+Package pdftex.def Info: figs/cons1.png  used on input line 74. on input line 7
+4.
+Package pdftex.def Info: Requested size: 307.28987pt x 87.88618pt on input line
+ 74.
+ [8
+
+ <./figs/cons1.png>]
+File: figs/cons1.png Graphic file (type png)
+<use figs/cons1.png>
+Package pdftex.def Info: figs/cons1.png  used on input line 74. on input line 7
+4.
+Package pdftex.def Info: Requested size: 307.28987pt x 87.88618pt on input line
+ 74.
  [9
 
- <./figs/cons1.png> <./figs/cons2.png>]
-File: figs/cons1.png Graphic file (type png)
-<use figs/cons1.png>
-Package pdftex.def Info: figs/cons1.png  used on input line 89. on input line 8
-9.
-Package pdftex.def Info: Requested size: 307.28987pt x 83.05096pt on input line
- 89.
+]
+<figs/cons2.png, id=79, 1400.23125pt x 456.70625pt>
 File: figs/cons2.png Graphic file (type png)
 <use figs/cons2.png>
-Package pdftex.def Info: figs/cons2.png  used on input line 89. on input line 8
-9.
-Package pdftex.def Info: Requested size: 307.28987pt x 80.50809pt on input line
- 89.
+Package pdftex.def Info: figs/cons2.png  used on input line 83. on input line 8
+3.
+Package pdftex.def Info: Requested size: 307.28987pt x 100.22481pt on input lin
+e 83.
+ [10
 
-[10
-
-]
-<figs/cons_new_rate.png, id=88, 707.64375pt x 494.84875pt>
+ <./figs/cons2.png>]
+<figs/cons_new_rate.png, id=86, 707.64375pt x 494.84875pt>
 File: figs/cons_new_rate.png Graphic file (type png)
 <use figs/cons_new_rate.png>
-Package pdftex.def Info: figs/cons_new_rate.png  used on input line 101. on inp
-ut line 101.
+Package pdftex.def Info: figs/cons_new_rate.png  used on input line 95. on inpu
+t line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 103.14357pt on input lin
-e 101.
-<figs/cons_new_timeouts.png, id=89, 659.46375pt x 456.70625pt>
+e 95.
+<figs/cons_new_timeouts.png, id=87, 659.46375pt x 456.70625pt>
 File: figs/cons_new_timeouts.png Graphic file (type png)
 <use figs/cons_new_timeouts.png>
-Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 101. on
- input line 101.
+Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 95. on 
+input line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 102.14818pt on input lin
-e 101.
-<figs/cons_new_queue.png, id=90, 1255.69125pt x 499.8675pt>
+e 95.
+<figs/cons_new_queue.png, id=88, 1255.69125pt x 499.8675pt>
 File: figs/cons_new_queue.png Graphic file (type png)
 <use figs/cons_new_queue.png>
-Package pdftex.def Info: figs/cons_new_queue.png  used on input line 101. on in
-put line 101.
+Package pdftex.def Info: figs/cons_new_queue.png  used on input line 95. on inp
+ut line 95.
 Package pdftex.def Info: Requested size: 307.28987pt x 122.31987pt on input lin
-e 101.
+e 95.
 
-Overfull \vbox (18.63719pt too high) detected at line 101
+Overfull \vbox (18.63719pt too high) detected at line 95
  []
 
 [11
@@ -1255,24 +1237,24 @@ Overfull \vbox (18.63719pt too high) detected at line 101
 ue.png>]
 File: figs/cons_new_rate.png Graphic file (type png)
 <use figs/cons_new_rate.png>
-Package pdftex.def Info: figs/cons_new_rate.png  used on input line 101. on inp
-ut line 101.
+Package pdftex.def Info: figs/cons_new_rate.png  used on input line 95. on inpu
+t line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 103.14357pt on input lin
-e 101.
+e 95.
 File: figs/cons_new_timeouts.png Graphic file (type png)
 <use figs/cons_new_timeouts.png>
-Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 101. on
- input line 101.
+Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 95. on 
+input line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 102.14818pt on input lin
-e 101.
+e 95.
 File: figs/cons_new_queue.png Graphic file (type png)
 <use figs/cons_new_queue.png>
-Package pdftex.def Info: figs/cons_new_queue.png  used on input line 101. on in
-put line 101.
+Package pdftex.def Info: figs/cons_new_queue.png  used on input line 95. on inp
+ut line 95.
 Package pdftex.def Info: Requested size: 307.28987pt x 122.31987pt on input lin
-e 101.
+e 95.
 
-Overfull \vbox (18.63719pt too high) detected at line 101
+Overfull \vbox (18.63719pt too high) detected at line 95
  []
 
 [12
@@ -1280,77 +1262,77 @@ Overfull \vbox (18.63719pt too high) detected at line 101
 ]
 File: figs/cons_new_rate.png Graphic file (type png)
 <use figs/cons_new_rate.png>
-Package pdftex.def Info: figs/cons_new_rate.png  used on input line 101. on inp
-ut line 101.
+Package pdftex.def Info: figs/cons_new_rate.png  used on input line 95. on inpu
+t line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 103.14357pt on input lin
-e 101.
+e 95.
 File: figs/cons_new_timeouts.png Graphic file (type png)
 <use figs/cons_new_timeouts.png>
-Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 101. on
- input line 101.
+Package pdftex.def Info: figs/cons_new_timeouts.png  used on input line 95. on 
+input line 95.
 Package pdftex.def Info: Requested size: 147.49782pt x 102.14818pt on input lin
-e 101.
+e 95.
 File: figs/cons_new_queue.png Graphic file (type png)
 <use figs/cons_new_queue.png>
-Package pdftex.def Info: figs/cons_new_queue.png  used on input line 101. on in
-put line 101.
+Package pdftex.def Info: figs/cons_new_queue.png  used on input line 95. on inp
+ut line 95.
 Package pdftex.def Info: Requested size: 307.28987pt x 122.31987pt on input lin
-e 101.
+e 95.
 
-Overfull \vbox (18.63719pt too high) detected at line 101
+Overfull \vbox (18.63719pt too high) detected at line 95
  []
 
 [13
 
 ]
-<figs/cons_pcon_rate.png, id=110, 1239.63126pt x 289.08pt>
+<figs/cons_pcon_rate.png, id=108, 1239.63126pt x 289.08pt>
 File: figs/cons_pcon_rate.png Graphic file (type png)
 <use figs/cons_pcon_rate.png>
-Package pdftex.def Info: figs/cons_pcon_rate.png  used on input line 113. on in
-put line 113.
+Package pdftex.def Info: figs/cons_pcon_rate.png  used on input line 107. on in
+put line 107.
 Package pdftex.def Info: Requested size: 307.28987pt x 71.65668pt on input line
- 113.
-<figs/cons_pcon_queue.png, id=111, 869.2475pt x 325.215pt>
+ 107.
+<figs/cons_pcon_queue.png, id=109, 869.2475pt x 325.215pt>
 File: figs/cons_pcon_queue.png Graphic file (type png)
 <use figs/cons_pcon_queue.png>
-Package pdftex.def Info: figs/cons_pcon_queue.png  used on input line 113. on i
-nput line 113.
+Package pdftex.def Info: figs/cons_pcon_queue.png  used on input line 107. on i
+nput line 107.
 Package pdftex.def Info: Requested size: 307.28987pt x 114.96829pt on input lin
-e 113.
+e 107.
  [14
 
  <./figs/cons_pcon_rate.png> <./figs/cons_pcon_queue.png>]
 File: figs/cons_pcon_rate.png Graphic file (type png)
 <use figs/cons_pcon_rate.png>
-Package pdftex.def Info: figs/cons_pcon_rate.png  used on input line 113. on in
-put line 113.
+Package pdftex.def Info: figs/cons_pcon_rate.png  used on input line 107. on in
+put line 107.
 Package pdftex.def Info: Requested size: 307.28987pt x 71.65668pt on input line
- 113.
+ 107.
 File: figs/cons_pcon_queue.png Graphic file (type png)
 <use figs/cons_pcon_queue.png>
-Package pdftex.def Info: figs/cons_pcon_queue.png  used on input line 113. on i
-nput line 113.
+Package pdftex.def Info: figs/cons_pcon_queue.png  used on input line 107. on i
+nput line 107.
 Package pdftex.def Info: Requested size: 307.28987pt x 114.96829pt on input lin
-e 113.
+e 107.
  [15
 
 ]
-<figs/cons_cubic_rate.png, id=124, 1253.68375pt x 290.08376pt>
+<figs/cons_cubic_rate.png, id=122, 1253.68375pt x 290.08376pt>
 File: figs/cons_cubic_rate.png Graphic file (type png)
 <use figs/cons_cubic_rate.png>
-Package pdftex.def Info: figs/cons_cubic_rate.png  used on input line 124. on i
-nput line 124.
+Package pdftex.def Info: figs/cons_cubic_rate.png  used on input line 118. on i
+nput line 118.
 Package pdftex.def Info: Requested size: 307.28987pt x 71.0999pt on input line 
-124.
-<figs/cons_cubic_queue.png, id=125, 869.2475pt x 327.2225pt>
+118.
+<figs/cons_cubic_queue.png, id=123, 869.2475pt x 327.2225pt>
 File: figs/cons_cubic_queue.png Graphic file (type png)
 <use figs/cons_cubic_queue.png>
-Package pdftex.def Info: figs/cons_cubic_queue.png  used on input line 124. on 
-input line 124.
+Package pdftex.def Info: figs/cons_cubic_queue.png  used on input line 118. on 
+input line 118.
 Package pdftex.def Info: Requested size: 307.28987pt x 115.67798pt on input lin
-e 124.
+e 118.
 
-Overfull \vbox (2.50148pt too high) detected at line 124
+Overfull \vbox (5.50148pt too high) detected at line 118
  []
 
 [16
@@ -1358,25 +1340,39 @@ Overfull \vbox (2.50148pt too high) detected at line 124
  <./figs/cons_cubic_rate.png> <./figs/cons_cubic_queue.png>]
 File: figs/cons_cubic_rate.png Graphic file (type png)
 <use figs/cons_cubic_rate.png>
-Package pdftex.def Info: figs/cons_cubic_rate.png  used on input line 124. on i
-nput line 124.
+Package pdftex.def Info: figs/cons_cubic_rate.png  used on input line 118. on i
+nput line 118.
 Package pdftex.def Info: Requested size: 307.28987pt x 71.0999pt on input line 
-124.
+118.
 File: figs/cons_cubic_queue.png Graphic file (type png)
 <use figs/cons_cubic_queue.png>
-Package pdftex.def Info: figs/cons_cubic_queue.png  used on input line 124. on 
-input line 124.
+Package pdftex.def Info: figs/cons_cubic_queue.png  used on input line 118. on 
+input line 118.
 Package pdftex.def Info: Requested size: 307.28987pt x 115.67798pt on input lin
-e 124.
+e 118.
 
-Overfull \vbox (2.50148pt too high) detected at line 124
+Overfull \vbox (5.50148pt too high) detected at line 118
  []
 
 [17
 
-] [18
+]
+<figs/ns3-queue.png, id=136, 665.48625pt x 587.19376pt>
+File: figs/ns3-queue.png Graphic file (type png)
+<use figs/ns3-queue.png>
+Package pdftex.def Info: figs/ns3-queue.png  used on input line 126. on input l
+ine 126.
+Package pdftex.def Info: Requested size: 226.6685pt x 200.0pt on input line 126
+.
 
-] [19
+Overfull \vbox (17.05692pt too high) detected at line 126
+ []
+
+[18
+
+ <./figs/ns3-queue.png>] [19
+
+] [20
 
 ])
 \tf@nav=\write6
@@ -1401,13 +1397,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 21745 strings out of 494936
- 431112 string characters out of 6180919
- 489328 words of memory out of 5000000
- 24494 multiletter control sequences out of 15000+600000
- 46434 words of font info for 45 fonts, out of 8000000 for 9000
+ 21719 strings out of 494936
+ 430272 string characters out of 6180919
+ 488328 words of memory out of 5000000
+ 24466 multiletter control sequences out of 15000+600000
+ 46177 words of font info for 44 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,13n,91p,1877b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,83p,1877b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathsy.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/t
@@ -1416,10 +1412,10 @@ mss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso
 12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fon
 ts/type1/public/lm/lmsy10.pfb>
-Output written on retreat_final_2017.pdf (19 pages, 500003 bytes).
+Output written on retreat_final_2017.pdf (20 pages, 455632 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
- 133 compressed objects within 2 object streams
- 39 named destinations out of 1000 (max. 500000)
+ 199 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
  98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,30 +5,23 @@
 %\end{frame}
 
 
-\begin{frame}{Motivation and Contribution to NDN:}
+\begin{frame}{Motivation}
 \begin{itemize}
-\item The current NFD congestion detection doesn't work in ndnSIM, since ndnSIM doesn't use regular TCP, UDP, or Unix faces. 
-\item Tasks: 
-\begin{itemize}
-\item Implement a ns-3 Queue based on CoDel that detects congestion and inserts congestion marks.
-\item Map these congestion marks onto NDNLP/ns-3 packets.
-\end{itemize}
-\item Additional Tasks (if time):
-\begin{itemize}
-\item Start submitting the code to Gerrit.
-\item Implement a TCP-Cubic like consumer app and compare it against the AIMD app.
-\end{itemize}
+\item NFD congestion detection doesn't work in ndnSIM\\ (no real TCP/UDP/Unix faces)
+\pause
+\item Tasks: Fix that. 
+%\begin{itemize}
+%\item Implement a ns-3 Queue based on CoDel that detects congestion and inserts congestion marks.
+%\item Map these congestion marks onto NDNLP/ns-3 packets.
+%\end{itemize}
+%\item Additional Tasks (if time):
+%\begin{itemize}
+%\item Start submitting the code to Gerrit.
+%\item Implement a TCP-Cubic like consumer app and compare it against the AIMD app.
+%\end{itemize}
 \end{itemize}
 \end{frame}
 
-
-
-\begin{frame}{Corner-stone}
-
-NS-3 separated queuing in traffic-control module as:
-
-\includegraphics[height=200pt]{figs/ns3-queue.png}
-\end{frame}
 
 
 \begin{frame}{Solution Steps}
@@ -74,17 +67,18 @@ ConsumerWindow App:
 \item On TimeOut: $m_{cwnd} \leftarrow 2$
 \end{itemize}
 
+\pause
+\includegraphics[width=\linewidth]{figs/cons1.png}
 
 
 \end{frame}
 
-\begin{frame}{How ndnSIM performs right now -- Results}
-
-\includegraphics[width=\linewidth]{figs/cons1.png}\\
-\pause
-\includegraphics[width=\linewidth]{figs/cons2.png}
+\begin{frame}{How ndnSIM performs right now}
 
 60,000 Timeouts!!!
+
+\includegraphics[width=\linewidth]{figs/cons2.png}
+
 
 \end{frame}
 
@@ -105,7 +99,7 @@ ConsumerWindow App:
 
 \includegraphics[width=\linewidth]{figs/cons_pcon_rate.png}\\
 \only<1-2>{
-No Timeouts!, Shorter ``sawtooth'' patterns
+No Timeouts!, Shorter ``sawtooth'' patterns (about 15s)
 }
 \pause
 \includegraphics<1-2>[width=\linewidth]{figs/cons_pcon_queue.png}
@@ -119,8 +113,16 @@ No Timeouts!, Shorter ``sawtooth'' patterns
 \pause
 \includegraphics<1-2>[width=\linewidth]{figs/cons_cubic_queue.png}
 
-Even Shorter Sawtooths!
+Even Shorter Sawtooths (about 7s)!
 
+\end{frame}
+
+
+\begin{frame}{Corner-stone}
+
+NS-3 separated queuing in traffic-control module as:
+
+\includegraphics[height=200pt]{figs/ns3-queue.png}
 \end{frame}
 
 
