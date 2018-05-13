@@ -71,10 +71,10 @@ ConsumerWindow::GetTypeId(void)
                     MakeBooleanAccessor(&ConsumerWindow::m_setInitialWindowOnTimeout),
                     MakeBooleanChecker())
 
-//      .AddTraceSource("WindowTrace",
-//                      "Window that controls how many outstanding interests are allowed",
-//                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
-//                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
+      .AddTraceSource("WindowTrace",
+                      "Window that controls how many outstanding interests are allowed",
+                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
+                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
       .AddTraceSource("InFlight", "Current number of outstanding interests",
                       MakeTraceSourceAccessor(&ConsumerWindow::m_inFlight),
                       "ns3::ndn::ConsumerWindow::WindowTraceCallback");

@@ -99,7 +99,7 @@ protected:
   uint32_t m_initialWindow;
   bool m_setInitialWindowOnTimeout;
 
-  double m_window;
+  TracedValue<double> m_window;
   TracedValue<uint32_t> m_inFlight;
 };
 

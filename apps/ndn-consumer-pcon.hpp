@@ -42,6 +42,7 @@ public:
    * \brief Default constructor
    */
   ConsumerPCON() {
+    std::cout << "Started Consumer PCON\n";
     ConsumerWindow();
   }
 

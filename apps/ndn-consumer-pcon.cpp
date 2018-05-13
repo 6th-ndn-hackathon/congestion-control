@@ -140,7 +140,7 @@ void ConsumerPCON::windowDecrease(bool setInitialWindow)
 
   // Cwnd can never fall below initial window!
   // TODO: Turn into double!
-  m_window = std::max(m_window, double(m_initialWindow));
+  m_window = std::max(m_window.Get(), double(m_initialWindow));
 }
 
 
