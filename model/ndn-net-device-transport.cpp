@@ -118,5 +118,24 @@ NetDeviceTransport::GetNetDevice() const
   return m_netDevice;
 }
 
+ssize_t
+NetDeviceTransport::getSendQueueCapacity() const
+{
+  PointerValue txQueueAttribute;
+  m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
+  Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
+  // must be put into bytes mode queue
+  return txQueue->GetMaxBytes();
+}
+
+ssize_t
+NetDeviceTransport::getSendQueueLength()
+{
+  PointerValue txQueueAttribute;
+  m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
+  Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
+  return txQueue->GetNBytes();
+}
+
 } // namespace ndn
 } // namespace ns3

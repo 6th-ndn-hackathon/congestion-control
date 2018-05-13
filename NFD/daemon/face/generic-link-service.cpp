@@ -40,7 +40,7 @@ GenericLinkService::Options::Options()
   : allowLocalFields(false)
   , allowFragmentation(false)
   , allowReassembly(false)
-  , allowCongestionMarking(false)
+  , allowCongestionMarking(true)
   , baseCongestionMarkingInterval(time::milliseconds(100)) // Interval from RFC 8289 (CoDel)
   , defaultCongestionThreshold(65536) // This default value works well for a queue capacity of 200KiB
   , allowSelfLearning(false)
@@ -88,13 +88,12 @@ GenericLinkService::sendLpPacket(lp::Packet&& pkt)
     m_reliability.piggyback(pkt, mtu);
   }
 
-  checkCongestionLevel(pkt);
-  /*if (m_options.allowCongestionMarking) {
+  if (m_options.allowCongestionMarking) {
     checkCongestionLevel(pkt);
   }
   else {
     std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Congestion disabled\n";
-  }*/
+  }
 
   Transport::Packet tp(pkt.wireEncode());
   if (mtu != MTU_UNLIMITED && tp.packet.size() > static_cast<size_t>(mtu)) {

@@ -57,23 +57,10 @@ public:
   GetNetDevice() const;
 
   virtual ssize_t
-  getSendQueueCapacity() const override
-  {
-    PointerValue txQueueAttribute;
-    m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
-    Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
-    // must be put into bytes mode queue
-    return txQueue->GetMaxSize().GetValue();
-  }
+  getSendQueueCapacity() const override;
 
   virtual ssize_t
-  getSendQueueLength() override
-  {
-    PointerValue txQueueAttribute;
-    m_netDevice->GetAttribute ("TxQueue", txQueueAttribute);
-    Ptr<ns3::QueueBase> txQueue = txQueueAttribute.Get<ns3::QueueBase> ();
-    return txQueue->GetNBytes();
-  }
+  getSendQueueLength() override;
 
 private:
   virtual void
