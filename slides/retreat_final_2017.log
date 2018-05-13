@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2017.8.31)  13 MAY 2018 18:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2017.8.31)  13 MAY 2018 18:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1360,21 +1360,55 @@ Overfull \vbox (5.50148pt too high) detected at line 118
 <figs/ns3-queue.png, id=136, 665.48625pt x 587.19376pt>
 File: figs/ns3-queue.png Graphic file (type png)
 <use figs/ns3-queue.png>
-Package pdftex.def Info: figs/ns3-queue.png  used on input line 126. on input l
-ine 126.
-Package pdftex.def Info: Requested size: 226.6685pt x 200.0pt on input line 126
+Package pdftex.def Info: figs/ns3-queue.png  used on input line 135. on input l
+ine 135.
+Package pdftex.def Info: Requested size: 169.9963pt x 150.0pt on input line 135
 .
 
-Overfull \vbox (17.05692pt too high) detected at line 126
+Overfull \vbox (29.83153pt too high) detected at line 135
  []
 
 [18
 
- <./figs/ns3-queue.png>] [19
+ <./figs/ns3-queue.png>]
+File: figs/ns3-queue.png Graphic file (type png)
+<use figs/ns3-queue.png>
+Package pdftex.def Info: figs/ns3-queue.png  used on input line 135. on input l
+ine 135.
+Package pdftex.def Info: Requested size: 169.9963pt x 150.0pt on input line 135
+.
 
-] [20
+Overfull \vbox (29.83153pt too high) detected at line 135
+ []
+
+[19
+
+]
+File: figs/ns3-queue.png Graphic file (type png)
+<use figs/ns3-queue.png>
+Package pdftex.def Info: figs/ns3-queue.png  used on input line 135. on input l
+ine 135.
+Package pdftex.def Info: Requested size: 169.9963pt x 150.0pt on input line 135
+.
+
+Overfull \vbox (29.83153pt too high) detected at line 135
+ []
+
+[20
 
 ])
+Runaway argument?
+ 
+! File ended while scanning use of \frame.
+<inserted text> 
+                \par 
+l.29 \input{content}
+                    
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
 \tf@nav=\write6
 \openout6 = `retreat_final_2017.nav'.
 
@@ -1384,9 +1418,22 @@ Overfull \vbox (17.05692pt too high) detected at line 126
 \tf@snm=\write8
 \openout8 = `retreat_final_2017.snm'.
 
+
+! LaTeX Error: \begin{frame} on input line 138 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \end{document}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
- (./retreat_final_2017.aux)
+(./retreat_final_2017.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
 Package rerunfilecheck Info: File `retreat_final_2017.out' has not changed.
@@ -1395,27 +1442,31 @@ Package rerunfilecheck Info: File `retreat_final_2017.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
- ) 
+ )
+(\end occurred inside a group at level 2)
+
+### semi simple group (level 2) entered at line 138 (\begingroup)
+### semi simple group (level 1) entered at line 138 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 21719 strings out of 494936
- 430272 string characters out of 6180919
+ 21716 strings out of 494936
+ 430238 string characters out of 6180919
  488328 words of memory out of 5000000
- 24466 multiletter control sequences out of 15000+600000
- 46177 words of font info for 44 fonts, out of 8000000 for 9000
+ 24463 multiletter control sequences out of 15000+600000
+ 43441 words of font info for 43 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,13n,83p,1877b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-mathsy.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/t
-exmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso
-12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fon
-ts/type1/public/lm/lmsy10.pfb>
-Output written on retreat_final_2017.pdf (20 pages, 455632 bytes).
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texm
+f/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb
+></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/typ
+e1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmsso12.pfb></usr/share/texmf/fonts/type1/
+public/lm/lmsso8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb>
+Output written on retreat_final_2017.pdf (20 pages, 439342 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
+ 195 PDF objects out of 1000 (max. 8388607)
+ 134 compressed objects within 2 object streams
  41 named destinations out of 1000 (max. 500000)
  98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

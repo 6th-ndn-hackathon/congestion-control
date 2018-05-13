@@ -118,40 +118,41 @@ Even Shorter Sawtooths (about 7s)!
 \end{frame}
 
 
-\begin{frame}{Corner-stone}
+\begin{frame}{Future Work}
 
-NS-3 separated queuing in traffic-control module as:
-
-\includegraphics[height=200pt]{figs/ns3-queue.png}
-\end{frame}
-
-
-
-
-
-
-
-%\begin{frame}{Map congestion marks onto NDNLP - ns-3 packets:}
-
-%We utilized suggestion from here:
-
-%\url{https://redmine.named-data.net/issues/4578#note-3}
-
-%\end{frame}
-
-
-
-\begin{frame}{Experimental environment}
-
-Local topology:
-
+Congestion Detection via adapted CoDelQueue:
 \begin{itemize}
-\item UDP Tunnels \& TCP Tunnels
-\item Ethernet \& WiFi
+\item Worked well in ns3 3.23
+\pause
+\item Doesn't work anymore in ns3 3.27 (current ndnSIM)
 \end{itemize}
 
+\pause
+NS-3 separated queuing in traffic-control module as:
+
+\centering
+\includegraphics[height=150pt]{figs/ns3-queue.png}
 \end{frame}
 
+
+\begin{frame}{Summary} {
+
+TODO
+
+}
+
+
+
+%\begin{frame}{Experimental environment}
+%
+%Local topology:
+%
+%\begin{itemize}
+%\item UDP Tunnels \& TCP Tunnels
+%\item Ethernet \& WiFi
+%\end{itemize}
+%
+%\end{frame}
 %
 %\begin{frame}{Results (WiFi):}
 %
@@ -194,11 +195,6 @@ Local topology:
 
 
 
-
-
-
-
-
 %% Last slide
 \begin{frame}
 	\frametitle{The End}
@@ -210,7 +206,7 @@ Local topology:
 	}
 	\vspace{2.5cm}  
 	\begin{flushright}  
-		Klaus Schneider, Eric Newberry, Chavoosh Ghasemi \\
+		Klaus Schneider, Ashiqur Rahman, Chavoosh Ghasemi \\
 %		 \footnotesize{
 %%			\url{klaus@cs.arizona.edu} \\
 %%			\url{https://www.cs.arizona.edu/~klaus/} %\\ 
