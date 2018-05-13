@@ -49,6 +49,10 @@ public:
   virtual void
   OnData(shared_ptr<const Data> contentObject) override;
 
+  virtual void
+  OnTimeout(uint32_t sequenceNumber) override;
+
+
 //  virtual void
 //  OnTimeout(uint32_t sequenceNumber);
 //

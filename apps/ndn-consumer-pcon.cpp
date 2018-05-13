@@ -27,6 +27,7 @@
 //#include "ns3/uinteger.h"
 //#include "ns3/double.h"
 
+
 NS_LOG_COMPONENT_DEFINE("ndn.ConsumerPCON");
 
 namespace ns3 {
@@ -53,11 +54,23 @@ ConsumerPCON::OnData(shared_ptr<const Data> contentObject)
 {
   auto congMark = contentObject->getCongestionMark();
   if (congMark > 0) {
-    std::cout << "Consumer got congestion mark!\n";
+    std::cout << Simulator::Now().GetMilliSeconds() << "ms Consumer got congestion mark!\n";
   }
 
   ConsumerWindow::OnData(contentObject);
 }
+
+
+void
+ConsumerPCON::OnTimeout(uint32_t sequenceNumber)
+{
+  std::cout << Simulator::Now().GetMilliSeconds() << " ms Timeout packet " << sequenceNumber
+      << "\n";
+
+  ConsumerWindow::OnTimeout(sequenceNumber);
+}
+
+
 
 
 
