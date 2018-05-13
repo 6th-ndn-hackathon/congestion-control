@@ -71,10 +71,13 @@ ConsumerPCON::OnData(shared_ptr<const Data> contentObject)
     m_highData = seqNum;
   }
 
+  bool REACT_TO_CONG_MARKS {true};
+
   auto congMark = contentObject->getCongestionMark();
-  if (congMark > 0) {
+  if (REACT_TO_CONG_MARKS && congMark > 0) {
     std::cout << Simulator::Now().GetMilliSeconds() << "ms Consumer got congestion mark!\n";
-    windowDecrease(false);
+
+    windowDecrease();
   }
   else {
     windowIncrease();
@@ -106,7 +109,7 @@ ConsumerPCON::OnData(shared_ptr<const Data> contentObject)
 
 void ConsumerPCON::windowIncrease()
 {
-  if (CC_ALGORITHM == "AIMD"){
+  if (CC_ALGORITHM == "AIMD") {
     if (m_window < m_sstresh) {
       m_window = m_window + 1.0;
     }
@@ -125,8 +128,46 @@ void ConsumerPCON::windowIncrease()
   }
 }
 
-void ConsumerPCON::windowDecrease(bool setInitialWindow)
+
+
+void
+ConsumerPCON::OnTimeout(uint32_t sequenceNumber)
 {
+  std::cout << Simulator::Now().GetMilliSeconds() << " ms Timeout packet " << sequenceNumber
+      << "\n";
+  std::cout.flush();
+
+  windowDecrease();
+//  ConsumerWindow::OnTimeout(sequenceNumber);
+
+  if (m_inFlight > static_cast<uint32_t>(0)) {
+    m_inFlight--;
+  }
+
+  NS_LOG_DEBUG("Window: " << m_window << ", InFlight: " << m_inFlight);
+  Consumer::OnTimeout(sequenceNumber);
+}
+
+
+void ConsumerPCON::windowDecrease()
+{
+  // Highest received data/ACK > recovery point.
+  if (m_highData <= m_recoveryPoint) {
+    std::cout << "Surpressed window decrease, highData: " << m_highData << ", recoveryPoint: "
+        << m_recoveryPoint << "\n";
+    return;
+  }
+  else {
+    const double diff = m_seq - m_highData;
+    assert(diff > 0);
+
+    constexpr double ADD_RTT_SURPRESS = 0.5;
+
+    // Problem: No long integer:
+    // Set recovery point to current interest Seq (1.5 RTTs ahead).
+    m_recoveryPoint = m_seq + (ADD_RTT_SURPRESS * diff);
+  }
+
   std::cout << Simulator::Now().GetMilliSeconds() << "ms Window decrease: "
       << m_window << " -> " << m_window * BETA << "\n";
   std::cout.flush();
@@ -140,7 +181,7 @@ void ConsumerPCON::windowDecrease(bool setInitialWindow)
     cubicDecrease();
   }
   else if (CC_ALGORITHM == "BIC") {
-    bicDecrease(setInitialWindow);
+    bicDecrease(false);
   }
   else {
     assert((false) && "Wrong CC Algorithm!");
@@ -148,18 +189,6 @@ void ConsumerPCON::windowDecrease(bool setInitialWindow)
 
   // Cwnd can never fall below initial window!
   m_window = std::max(m_window, double(m_initialWindow));
-}
-
-
-void
-ConsumerPCON::OnTimeout(uint32_t sequenceNumber)
-{
-  std::cout << Simulator::Now().GetMilliSeconds() << " ms Timeout packet " << sequenceNumber
-      << "\n";
-  std::cout.flush();
-
-  windowDecrease(false);
-  ConsumerWindow::OnTimeout(sequenceNumber);
 }
 
 
@@ -223,7 +252,7 @@ ConsumerPCON::bicDecrease(bool resetToInitial)
   if (m_window >= BIC_LOW_WINDOW) {
     auto prev_max = bic_max_win;
     bic_max_win = m_window;
-    m_window = m_window * BETA;
+    m_window = m_window * CUBIC_BETA;
     bic_min_win = m_window;
     if (prev_max > bic_max_win) { //Fast. Conv.
       bic_max_win = (bic_max_win + bic_min_win) / 2;
@@ -231,15 +260,8 @@ ConsumerPCON::bicDecrease(bool resetToInitial)
     bic_target_win = (bic_max_win + bic_min_win) / 2;
   } else {
     // Normal TCP Decrease:
-    m_sstresh = m_window * BETA;
+    m_sstresh = m_window * CUBIC_BETA;
     m_window = m_sstresh;
-  }
-
-  if (resetToInitial) {
-    // Does this work for TCP BIC?
-    assert(false);
-    m_sstresh = m_window * BETA;
-    m_window = m_initialWindow;
   }
 }
 
@@ -249,7 +271,8 @@ ConsumerPCON::cubicIncrease()
 {
   // 1. Time since last congestion event in Seconds
   const double t = time::duration_cast<time::microseconds>(
-      time::steady_clock::now() - m_cubic_lastDecrease).count() / 1000000.0; // @suppress("Method cannot be resolved")
+      time::steady_clock::now() - m_cubic_lastDecrease)
+          .count() / 1000000.0; // @suppress("Method cannot be resolved")
 
   // 2. Time it takes to increase the window to cubic_wmax
   // K = cubic_root(W_max*(1-beta_cubic)/C) (Eq. 2)
@@ -297,7 +320,7 @@ void
 ConsumerPCON::cubicDecrease()
 {
   // Fast convergence (further reduce w_max):
-  const bool CUBIC_FAST_CONV = true;
+  const bool CUBIC_FAST_CONV = false;
 
   // In percent
   const double FAST_CONV_DIFF = 1.0;

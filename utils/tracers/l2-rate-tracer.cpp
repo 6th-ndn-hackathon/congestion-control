@@ -28,6 +28,9 @@
 #include "ns3/node.h"
 #include "ns3/log.h"
 
+#include "ns3/point-to-point-net-device.h"
+#include "ns3/queue.h"
+
 #include <boost/lexical_cast.hpp>
 #include <fstream>
 
@@ -129,7 +132,11 @@ L2RateTracer::PrintHeader(std::ostream& os) const
      << "\t"
      << "PacketsRaw"
      << "\t"
-     << "KilobytesRaw";
+     << "KilobytesRaw"
+     << "\t"
+     << "CongPrice"
+     << "\t"
+     << "Marks";
 }
 
 void
@@ -152,12 +159,35 @@ const double alpha = 0.8;
                                                                                                    \
   os << time.ToDouble(Time::S) << "\t" << m_node << "\t" << interface << "\t" << printName << "\t" \
      << STATS(2).fieldName << "\t" << STATS(3).fieldName << "\t" << STATS(0).fieldName << "\t"     \
-     << STATS(1).fieldName / 1024.0 << "\n";
+     << STATS(1).fieldName / 1024.0 << "\t" << "0" << "\t" << "0" << "\n";
 
 void
 L2RateTracer::Print(std::ostream& os) const
 {
   Time time = Simulator::Now();
+
+  // New Output: Print Queue
+  for (uint32_t devId = 0; devId < m_nodePtr->GetNDevices(); devId++) {
+    auto ptpNetdev = ns3::DynamicCast<ns3::PointToPointNetDevice>(m_nodePtr->GetDevice(devId));
+    if (ptpNetdev) {
+
+      auto queue = ptpNetdev->GetQueue();
+
+      queue->GetNBytes();
+
+      uint32_t nPackets {queue->GetNPackets()};
+      uint32_t nBytes {queue->GetNBytes()};
+      double congPrice {0};
+      int marks {0};
+
+      Time now = Simulator::Now();
+      //Time  Node  Interface Type  Packets Kilobytes PacketsRaw  KilobytesRaw
+      os << now.ToDouble(Time::S) << "\t" << m_node << "\t" << devId << "\t" << "Queue"
+          << "\t" << nPackets << "\t" << nBytes << "\t" << 0 << "\t" << 0
+          << "\t" << congPrice << "\t" << marks << "\n";
+    }
+  }
+
 
   PRINTER("Drop", m_drop, "combined");
 }

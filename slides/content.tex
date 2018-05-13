@@ -1,8 +1,8 @@
 
 
-\begin{frame}{Need}
-\textbf{Congestion Control} = Crucial part of \textbf{App Performance}
-\end{frame}
+%\begin{frame}{Need}
+%\textbf{Congestion Control} = Crucial part of \textbf{App Performance}
+%\end{frame}
 
 
 \begin{frame}{Motivation and Contribution to NDN:}
@@ -27,9 +27,106 @@
 
 NS-3 separated queuing in traffic-control module as:
 
-\includegraphics[height=200pt]{../figs/ns3-queue.png}
+\includegraphics[height=200pt]{figs/ns3-queue.png}
+\end{frame}
+
+
+\begin{frame}{Solution Steps}
+
+\begin{enumerate}
+\item ndnSIM doesn't use real TCP or UDP faces.\\
+$\Rightarrow$ NetDeviceTransport: override of
+virtual function(s) for congestion control.
+\pause
+
+\item CongestionMarks signaled via NDNLP: Already works! 
+\pause
+
+\item Implement Consumer App that reacts to congestion marks (AIMD and TCP CUBIC.)
+
+\end{enumerate}
 
 \end{frame}
+
+
+\begin{frame}{Evaluation Scenario}
+
+Very simple scenario: 
+
+\includegraphics[width=\linewidth]{figs/Figure_3.pdf}
+
+\begin{itemize}
+\item 1 Consumer
+\item 50 Mbit/s bottleneck capacity
+\item 40ms RTT
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{How ndnSIM performs right now}
+
+ConsumerWindow App: 
+
+\begin{itemize}
+\item On Data: $m_{cwnd}$++ (constant slow start!)
+\item On TimeOut: $m_{cwnd} \leftarrow 2$
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}{How ndnSIM performs right now -- Results}
+
+\includegraphics[width=\linewidth]{figs/cons1.png}\\
+\pause
+\includegraphics[width=\linewidth]{figs/cons2.png}
+
+60,000 Timeouts!!!
+
+\end{frame}
+
+
+\begin{frame}{Improved ConsumerWindow (no congestion marks)}
+
+\includegraphics[width=0.48\linewidth]{figs/cons_new_rate.png}
+\hspace{.1em}
+\pause
+\includegraphics[width=0.48\linewidth]{figs/cons_new_timeouts.png}\\
+\pause
+\includegraphics[width=\linewidth]{figs/cons_new_queue.png}
+
+\end{frame}
+
+
+\begin{frame}{ConsumerPCON -- AIMD}
+
+\includegraphics[width=\linewidth]{figs/cons_pcon_rate.png}\\
+\only<1-2>{
+No Timeouts!, Shorter ``sawtooth'' patterns
+}
+\pause
+\includegraphics<1-2>[width=\linewidth]{figs/cons_pcon_queue.png}
+
+\end{frame}
+
+
+\begin{frame}{ConsumerPCON -- CUBIC}
+
+\includegraphics[width=\linewidth]{figs/cons_cubic_rate.png}\\
+\pause
+\includegraphics<1-2>[width=\linewidth]{figs/cons_cubic_queue.png}
+
+Even Shorter Sawtooths!
+
+\end{frame}
+
+
+
+
+
 
 
 %\begin{frame}{Map congestion marks onto NDNLP - ns-3 packets:}
@@ -46,8 +143,6 @@ NS-3 separated queuing in traffic-control module as:
 
 Local topology:
 
-\includegraphics[width=\linewidth]{../figs/Figure_3.pdf}
-
 \begin{itemize}
 \item UDP Tunnels \& TCP Tunnels
 \item Ethernet \& WiFi
@@ -55,230 +150,50 @@ Local topology:
 
 \end{frame}
 
-
-\begin{frame}{Results (WiFi):}
-
-\textbf{UDP (both links):}\\[.3em]
-\begin{tabular}{ l r l r }
-\toprule
-\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
-\midrule
-Without CC: & 60ms 	& 28.7 Mbps	 & 250 Retx \\
-With CC: & 6-9ms 		& 26.0 Mbps		 & 0 Retx \\
-\bottomrule
-\end{tabular}
-
-\pause
-\vspace*{1em}
-
-\textbf{TCP (both links):}\\[.3em]
-\begin{tabular}{ l r l r }
-\toprule
-\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
-\midrule
-Without CC: & 115ms 	& 37 Mbps	 & 320 Retx \\
-With CC: 		& 	7ms  	& 29 Mbps	 & 0 Retx \\
-\bottomrule
-\end{tabular}
-
-\vspace*{1em}
-
-\pause
-Ethernet: Cong. signals can even give you a \textbf{higher goodput!}
-
-\end{frame}
-
-
-\begin{frame}{Results (WiFi):}
-
-\includegraphics[width=\linewidth]{../results/screenshots.png}
-
-\end{frame}
-
-
-
-
-\begin{frame}{Takeaway:}
-
-{\footnotesize
-\url{https://github.com/5th-ndn-hackathon/congestion-control}
-}
-\begin{enumerate}
-\item Congestion detection by socket queue works! 
-\item Even works on WiFi (much lower layer).
-\item Use UDP Tunnels + congestion signaling everywhere.
-\end{enumerate}
-
-\pause
-Future work
-\begin{enumerate}
-\item Implement in NFD (run on testbed)
-\item Test ``hidden congestion'' inside IP underlay (tunnel)
-\end{enumerate}
-
-
-\end{frame}
-
-
-
-
 %
-%\begin{frame}{Implementation Overview}
+%\begin{frame}{Results (WiFi):}
 %
-%From PCON paper \cite{schneider2016practical}:
-%	
-%	\includegraphics<1>[width=\linewidth]{images/architecture_1.pdf}
-%	\includegraphics<2>[width=\linewidth]{images/architecture_2.pdf}
-%	\includegraphics<3>[width=\linewidth]{images/architecture_3.pdf}
-%	\includegraphics<4>[width=\linewidth]{images/architecture_4.pdf}
-%	\includegraphics<5>[width=\linewidth]{images/architecture_5.pdf}
-%	
-%\end{frame}
-%
-%\begin{frame}{Implementation Overview: Redmine}
-%
-%	\includegraphics[width=\linewidth]{images/redmine_overview.png}
-%
-%\end{frame}
-%
-%\begin{frame}{What We Accomplished since last Retreat}
-%	
-%	Thanks to Eric, Davide, Chavoosh, Junxiao, and others.
-%	\pause
-%	\begin{enumerate}
-%		\item \textbf{Generic Congestion Marks}
-%		\begin{itemize}
-%		\item Defined in NDNLP
-%		\item Simple API with getters \& setters
-%%		to set and get congestion marks.
-%		\end{itemize}
-%		\pause
-%		
-%		\item \textbf{Consumer Congestion Adaptation}
-%		\begin{itemize}
-%		\item Catchunks: AIMD, react to congestion marks
-%%		\item Catchunks: AIMD adaptation, reduced version discovery timeout, Conservative (SACK) window adaptation, printSummary
-%		\end{itemize}
-%		\pause
-%		
-%		\item \textbf{Local Link Loss Detection} (NDNLP) 
-%		\begin{itemize}
-%		\item Detect lost packets (via gap in SeqNr or ACK Timeout)
-%		\item Signal to forwarding strategy \textbf{onLostInterest()}.
-%		\end{itemize}
-%	
-%	\end{enumerate}
-%	
-%\end{frame}
-%
-%
-%		% Mark data packets, nacks and Interests
-%		%Part of NDNLP
-%%		\item Congestion detection on Ethernet links / TCP tunnels?
-%%		\begin{itemize}
-%%			\item How to get the right queue?
-%%			\item How to get the queue inside NFD?
-%%%			\item 
-%%		\end{itemize}
-%%	\item Congestion detection on UDP tunnels %: Detect \& signal link losses
-%
-%		% How to get 
-%
-%%\begin{frame}{Congestion detection on UDP tunnels (Testbed)}
-%%	Vusirikala et al. -- \textbf{Hop-By-Hop Best Effort Link Layer Reliability in Named Data Networking} (Tech Report)
-%%	
-%%	Detect local ``link'' losses and signal to forwarding strategy
-%%	\pause
-%%		\begin{itemize}
-%%			\item How many local retransmissions? \pause
-%%			\item Decouple loss notification from retx. \pause
-%%			\item Positive vs. Negative ACKs? 
-%%			\begin{itemize}
-%%				\item Definitive knowledge about loss vs. overhead.
-%%			\end{itemize}
-%%		\pause
-%%		
-%%			\item ACK duplication?
-%%			\begin{itemize}
-%%				\item Duplicating ACKs cheaper than spurious retx
-%%%				\item 
-%%%				\item 
-%%			\end{itemize}
-%%		\pause
-%%		
-%%			\item Selective vs. Cumulative ACKs? \pause
-%%	\end{itemize}
-%%
-%%\end{frame}
-%
-%\begin{frame}{Future Work and Timeline}
-%
-%\begin{enumerate}
-%\item \textbf{Integration tests} (2 months)
-%\begin{itemize}
-%\item For congestion marks \& link loss detection
-%\item Check if current functionality works as expected
-%\end{itemize}
-%\pause
-%\item \textbf{Cong. Detection} based on \textbf{queue backlog}
-%(6 months)
-%\begin{itemize} 
-%%\item Different queues: NIC, kernel, socket queue 
-%\item To work on TCP/UDP Tunnels, Ethernet, Wireless
-%\item $\Rightarrow$ See our \textbf{Hackathon Project!}
-%\end{itemize}
-%\pause
-%\item \textbf{Consumer/Producer API} (9 months)
-%\begin{itemize}
-%\item Look at Ilya's work and Cisco's libcnet API
-%\end{itemize}
+%\textbf{UDP (both links):}\\[.3em]
+%\begin{tabular}{ l r l r }
+%\toprule
+%\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
+%\midrule
+%Without CC: & 60ms 	& 28.7 Mbps	 & 250 Retx \\
+%With CC: & 6-9ms 		& 26.0 Mbps		 & 0 Retx \\
+%\bottomrule
+%\end{tabular}
 %
 %\pause
-%\item \textbf{Multipath Forwarding} (needs more design)
-%\end{enumerate}
+%\vspace*{1em}
+%
+%\textbf{TCP (both links):}\\[.3em]
+%\begin{tabular}{ l r l r }
+%\toprule
+%\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
+%\midrule
+%Without CC: & 115ms 	& 37 Mbps	 & 320 Retx \\
+%With CC: 		& 	7ms  	& 29 Mbps	 & 0 Retx \\
+%\bottomrule
+%\end{tabular}
+%
+%\vspace*{1em}
+%
+%\pause
+%Ethernet: Cong. signals can even give you a \textbf{higher goodput!}
 %
 %\end{frame}
 %
 %
-%\begin{frame}{Progress in one Picture}
+%\begin{frame}{Results (WiFi):}
 %
-%\includegraphics[width=\linewidth]{images/architecture_progress.pdf}
+%\includegraphics[width=\linewidth]{../results/screenshots.png}
 %
 %\end{frame}
-%
-%
-%%
-%%\begin{frame}{Congestion detection on Ethernet links / TCP tunnels?}
-%%	
-%%	\begin{enumerate}
-%%		\item Ethernet: Read out NIC queue size + apply AQM logic
-%%		\item TCP Tunnel: Read send buffer occupancy
-%%		%			\item 
-%%	\end{enumerate}
-%%
-%%More work needed:
-%%\begin{itemize}
-%%		\item How to get the right queue?
-%%		\item How to get the queue inside NFD?
-%%\end{itemize}
-%%	
-%%\end{frame}
-%%
-%%
-%%\begin{frame}{More General Questions}
-%%	
-%%	\begin{itemize}
-%%		\item Congestion due to packet processing and memory overhead
-%%		\pause
-%%		% Wanted functionality? New congestion reaction mechanisms? 
-%%		\item DDoS in NDN: A congestion problem? 
-%%		\pause
-%%		\item BBR's applicability to NDN congestion control
-%%%		\item Congestion detection on Ethernet lisnks and on TCP tunnels?
-%%		
-%%	\end{itemize}
-%%	
-%%\end{frame}
+
+
+
+
+
 
 
 

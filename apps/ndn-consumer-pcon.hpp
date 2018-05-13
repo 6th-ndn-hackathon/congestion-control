@@ -63,7 +63,7 @@ public:
 //  WillSendOutInterest(uint32_t sequenceNumber);
 
 private:
-  void windowDecrease(bool setInitialWindow);
+  void windowDecrease();
 
   void windowIncrease();
 
@@ -87,12 +87,12 @@ private:
   const double BETA {0.5};
   const double CUBIC_BETA {0.8};
 
-  double m_cwnd{2};
+  //  double m_cwnd{2.0};
   double m_sstresh{std::numeric_limits<int32_t>::max()};
 
   // Variables for conservative window adaptation.
-  uint32_t m_highData;
-  double m_recoveryPoint;
+  uint32_t m_highData {0};
+  double m_recoveryPoint {0};
 
 
   /* TCP CUBIC Parameters */
@@ -102,9 +102,9 @@ private:
   static const shared_ptr<std::ofstream> m_osOutput;
 
 //  double m_cubic_k;
-  double m_cubic_wmax;
-  double m_cubic_last_wmax;
-  time::steady_clock::TimePoint m_cubic_lastDecrease;
+  double m_cubic_wmax{0};
+  double m_cubic_last_wmax{0};
+  time::steady_clock::TimePoint m_cubic_lastDecrease{time::steady_clock::now()};
 
   ns3::Time m_ccStopTime {ns3::Time::Max()};
 
@@ -118,16 +118,23 @@ private:
 
   const std::string CC_ALGORITHM;
 
-
   // BIC variables:
-  double bic_min_win; /* increase cwnd by 1 after ACKs */
-  double bic_max_win; /* last maximum snd_cwnd */
-  double bic_target_win; /* the last snd_cwnd */
-  double bic_ss_cwnd;
-  double bic_ss_target;
-  bool m_is_bic_ss;
-
+  double bic_min_win{0}; /* increase cwnd by 1 after ACKs */
+  double bic_max_win{std::numeric_limits<int32_t>::max()}; /* last maximum snd_cwnd */
+  double bic_target_win{0}; /* the last snd_cwnd */
+  double bic_ss_cwnd{0};
+  double bic_ss_target{0};
+  bool m_is_bic_ss{false};
 };
+
+//ConsumerCC::ConsumerCC() :
+//      m_initialWindow{1},
+//      m_maxSize{-1},
+//      m_maxMultiplier(8),
+//      m_minRtoInMS(1000),
+//{
+//}
+
 
 } // namespace ndn
 } // namespace ns3

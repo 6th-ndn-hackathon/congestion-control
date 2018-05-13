@@ -67,7 +67,7 @@ ConsumerWindow::GetTypeId(void)
                     MakeUintegerChecker<uint32_t>())
 
       .AddAttribute("InitialWindowOnTimeout", "Set window to initial value when timeout occurs",
-                    BooleanValue(false),
+                    BooleanValue(true),
                     MakeBooleanAccessor(&ConsumerWindow::m_setInitialWindowOnTimeout),
                     MakeBooleanChecker())
 
@@ -184,7 +184,7 @@ ConsumerWindow::ScheduleNextPacket()
 void
 ConsumerWindow::OnData(shared_ptr<const Data> contentObject)
 {
-  std::cout << "ConsumerWindow: OnData\n";
+//  std::cout << "ConsumerWindow: OnData\n";
   Consumer::OnData(contentObject);
 
   m_window = m_window + 1;
@@ -199,12 +199,13 @@ ConsumerWindow::OnData(shared_ptr<const Data> contentObject)
 void
 ConsumerWindow::OnTimeout(uint32_t sequenceNumber)
 {
-  std::cout << "ConsumerWindow: OnTimeout\n";
+//  std::cout << "ConsumerWindow: OnTimeout\n";
   if (m_inFlight > static_cast<uint32_t>(0))
     m_inFlight--;
 
   if (m_setInitialWindowOnTimeout) {
     // m_window = std::max<uint32_t> (0, m_window - 1);
+    std::cout << "ConsumerWindow: Resetting window to 0!\n";
     m_window = m_initialWindow;
   }
 
