@@ -8,57 +8,37 @@
 \begin{frame}{Motivation and Contribution to NDN:}
 \begin{itemize}
 \item The current NFD congestion detection doesn't work in ndnSIM, since ndnSIM doesn't use regular TCP, UDP, or Unix faces. 
-\item This project aims to fix this and evaluate the proper function of the implementation.
 \item Tasks: 
 \begin{itemize}
 \item Implement a ns-3 Queue based on CoDel that detects congestion and inserts congestion marks.
 \item Map these congestion marks onto NDNLP/ns-3 packets.
-\item Implement a ndnSIM consumer application that reacts to the congestion marks.
 \end{itemize}
 \item Additional Tasks (if time):
 \begin{itemize}
 \item Start submitting the code to Gerrit.
 \item Implement a TCP-Cubic like consumer app and compare it against the AIMD app.
 \end{itemize}
-\item Required Languages/Knowledge: C++, NFD, ndnSIM
 \end{itemize}
-
-
 \end{frame}
 
 
 
-\begin{frame}{Ethernet Queue}
+\begin{frame}{Corner-stone}
 
-How to access low-level queues?
-\begin{itemize}
-\item libnl library
-\item OS-dependent (Linux)
-\item Hard to use (very low-level API)
-\item[$\Rightarrow$] Couldn't get it to work.
-\end{itemize}
+NS-3 separated queuing in traffic-control module as:
+
+\includegraphics[height=200pt]{../figs/ns3-queue.png}
 
 \end{frame}
 
 
-\begin{frame}{UDP \& TCP Tunnels}
+%\begin{frame}{Map congestion marks onto NDNLP - ns-3 packets:}
 
-How to access socket queue? 
-\begin{itemize}
-\item ioctl commands: TIOCOUTQ, SIOCOUTQNSD
-\item Portable (Mac and Linux)
-\item Retrieve queue backlog size.
-\item Threshold: 50KB (out of 200KB buffer limit)
-\end{itemize}
+%We utilized suggestion from here:
 
-\pause
-TCP: 
-\begin{itemize}
-\item Also look at std::queue$<$Block$>$ m\_sendQueue
-\item Threshold: 10 pkts (out of infinite)
-\end{itemize}
+%\url{https://redmine.named-data.net/issues/4578#note-3}
 
-\end{frame}
+%\end{frame}
 
 
 
