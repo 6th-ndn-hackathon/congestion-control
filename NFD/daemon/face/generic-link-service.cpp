@@ -245,7 +245,7 @@ GenericLinkService::checkCongestionLevel(lp::Packet& pkt)
 {
   ssize_t sendQueueLength = getTransport()->getSendQueueLength();
 
-  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueLength << "\n";
+//  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueLength << "\n";
 
   // This operation requires that the transport supports retrieving current send queue length
   if (sendQueueLength < 0) {
@@ -257,7 +257,7 @@ GenericLinkService::checkCongestionLevel(lp::Packet& pkt)
   size_t congestionThreshold = m_options.defaultCongestionThreshold;
   ssize_t sendQueueCapacity = getTransport()->getSendQueueCapacity();
 
-  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueCapacity << "\n";
+//  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " << sendQueueCapacity << "\n";
 
   if (sendQueueCapacity >= 0) {
     congestionThreshold = std::min(congestionThreshold,
