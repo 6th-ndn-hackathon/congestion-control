@@ -43,7 +43,7 @@ ConsumerWindow::GetTypeId(void)
       .SetParent<Consumer>()
       .AddConstructor<ConsumerWindow>()
 
-      .AddAttribute("Window", "Initial size of the window", StringValue("1"),
+      .AddAttribute("Window", "Initial size of the window", StringValue("2"),
                     MakeUintegerAccessor(&ConsumerWindow::GetWindow, &ConsumerWindow::SetWindow),
                     MakeUintegerChecker<uint32_t>())
 
@@ -67,14 +67,14 @@ ConsumerWindow::GetTypeId(void)
                     MakeUintegerChecker<uint32_t>())
 
       .AddAttribute("InitialWindowOnTimeout", "Set window to initial value when timeout occurs",
-                    BooleanValue(true),
+                    BooleanValue(false),
                     MakeBooleanAccessor(&ConsumerWindow::m_setInitialWindowOnTimeout),
                     MakeBooleanChecker())
 
-      .AddTraceSource("WindowTrace",
-                      "Window that controls how many outstanding interests are allowed",
-                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
-                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
+//      .AddTraceSource("WindowTrace",
+//                      "Window that controls how many outstanding interests are allowed",
+//                      MakeTraceSourceAccessor(&ConsumerWindow::m_window),
+//                      "ns3::ndn::ConsumerWindow::WindowTraceCallback")
       .AddTraceSource("InFlight", "Current number of outstanding interests",
                       MakeTraceSourceAccessor(&ConsumerWindow::m_inFlight),
                       "ns3::ndn::ConsumerWindow::WindowTraceCallback");

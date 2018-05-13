@@ -92,14 +92,14 @@ private:
   void
   SetSeqMax(uint32_t seqMax);
 
-private:
+protected:
   uint32_t m_payloadSize; // expected payload size
   double m_maxSize;       // max size to request
 
   uint32_t m_initialWindow;
   bool m_setInitialWindowOnTimeout;
 
-  TracedValue<uint32_t> m_window;
+  double m_window;
   TracedValue<uint32_t> m_inFlight;
 };
 

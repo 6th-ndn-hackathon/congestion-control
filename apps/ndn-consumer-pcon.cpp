@@ -33,6 +33,7 @@ NS_LOG_COMPONENT_DEFINE("ndn.ConsumerPCON");
 namespace ns3 {
 namespace ndn {
 
+const std::string CC_ALGORITHM {"AIMD"};
 
 NS_OBJECT_ENSURE_REGISTERED(ConsumerPCON);
 
@@ -52,20 +53,106 @@ ConsumerPCON::GetTypeId(void)
 void
 ConsumerPCON::OnData(shared_ptr<const Data> contentObject)
 {
-  auto congMark = contentObject->getCongestionMark();
-  if (congMark > 0) {
-    std::cout << Simulator::Now().GetMilliSeconds() << "ms Consumer got congestion mark!\n";
+  Consumer::OnData(contentObject);
+
+  // TODO: Problem in OnData!
+
+  // Get sequence Number
+  const auto seqNum = contentObject->getName().get(-1).toSequenceNumber();
+
+  // Set highest received data to seq. number
+  if (m_highData < seqNum) {
+    m_highData = seqNum;
   }
 
-  ConsumerWindow::OnData(contentObject);
+  auto congMark = contentObject->getCongestionMark();
+  if (congMark > 0) {
+    windowDecrease(false);
+    std::cout << Simulator::Now().GetMilliSeconds() << "ms Consumer got congestion mark!\n";
+  }
+  else {
+    windowIncrease();
+  }
+
+
+  if (m_inFlight > 0) {
+    m_inFlight--;
+  }
+
+  ScheduleNextPacket();
+//  ConsumerWindow::OnData(contentObject);
+}
+
+//void
+//ConsumerWindow::OnData(shared_ptr<const Data> contentObject)
+//{
+////  Consumer::OnData(contentObject);
+//
+////  m_window = m_window + 1;
+//
+//  if (m_inFlight > static_cast<uint32_t>(0))
+//    m_inFlight--;
+//  NS_LOG_DEBUG("Window: " << m_window << ", InFlight: " << m_inFlight);
+//
+//  ScheduleNextPacket();
+//}
+
+
+void ConsumerPCON::windowIncrease()
+{
+  if (CC_ALGORITHM == "AIMD"){
+    if (m_window < m_sstresh) {
+      m_window = m_window + 1.0;
+    }
+    else {
+      m_window += (1.0 / m_window);
+    }
+  }
+  else if (CC_ALGORITHM == "CUBIC") {
+    cubicIncrease();
+  }
+  else if (CC_ALGORITHM == "BIC") {
+    bicIncrease();
+  }
+  else {
+    assert((false) && "Wrong CC Algorithm!");
+  }
+}
+
+void ConsumerPCON::windowDecrease(bool setInitialWindow)
+{
+  std::cout << Simulator::Now().GetMilliSeconds() << "ms Window decrease, new window: "
+      << m_window << "\n";
+  if (CC_ALGORITHM == "AIMD") {
+    // Normal TCP Decrease:
+    m_sstresh = m_window * BETA;
+    m_window = m_sstresh;
+  }
+  else if (CC_ALGORITHM == "CUBIC") {
+    cubicDecrease();
+  }
+  else if (CC_ALGORITHM == "BIC") {
+    bicDecrease(setInitialWindow);
+  }
+  else {
+    assert((false) && "Wrong CC Algorithm!");
+  }
+
+  // Cwnd can never fall below initial window!
+  // TODO: Turn into double!
+  m_window = std::max(m_window, double(m_initialWindow));
 }
 
 
 void
 ConsumerPCON::OnTimeout(uint32_t sequenceNumber)
 {
+
   std::cout << Simulator::Now().GetMilliSeconds() << " ms Timeout packet " << sequenceNumber
       << "\n";
+  assert(false);
+
+  windowDecrease(false);
 
   ConsumerWindow::OnTimeout(sequenceNumber);
 }

@@ -52,15 +52,76 @@ public:
   virtual void
   OnTimeout(uint32_t sequenceNumber) override;
 
-
-//  virtual void
-//  OnTimeout(uint32_t sequenceNumber);
-//
 //  virtual void
 //  WillSendOutInterest(uint32_t sequenceNumber);
 
-public:
-  typedef void (*WindowTraceCallback)(uint32_t);
+private:
+  void windowDecrease(bool setInitialWindow);
+
+  void windowIncrease();
+
+  void
+  cubicIncrease(){
+    assert(false);
+  };
+
+  void
+  cubicDecrease(){
+    assert(false);
+  };
+
+  void
+  bicIncrease(){
+    assert(false);
+  };
+
+  void
+  bicDecrease(bool resetToInitial = false){
+    assert(false);
+  };
+
+
+
+private:
+  const double BETA {0.5};
+
+//  double m_cwnd{2};
+  double m_sstresh{std::numeric_limits<int32_t>::max()};
+
+
+  // Variables for conservative window adaptation.
+  uint32_t m_highData;
+  double m_recoveryPoint;
+
+
+  /* TCP CUBIC Parameters */
+  static constexpr double CUBIC_C = 0.4;
+  static constexpr double MAX_SSTRESH = 10; /* For limited slow start */
+
+  static const shared_ptr<std::ofstream> m_osOutput;
+
+//  double m_cubic_k;
+  double m_cubic_wmax;
+  double m_cubic_last_wmax;
+  time::steady_clock::TimePoint m_cubic_lastDecrease;
+
+  ns3::Time m_ccStopTime {ns3::Time::Max()};
+
+private:
+  /* TCP BIC Parameters */
+  // Regular TCP behavior (including ss) until this window size
+  static constexpr int BIC_LOW_WINDOW = 14;
+
+  // Should be between 8 and 64.
+  static constexpr int BIC_MAX_INCREMENT = 16;
+
+  // BIC variables:
+  double bic_min_win; /* increase cwnd by 1 after ACKs */
+  double bic_max_win; /* last maximum snd_cwnd */
+  double bic_target_win; /* the last snd_cwnd */
+  double bic_ss_cwnd;
+  double bic_ss_target;
+  bool m_is_bic_ss;
 
 };
 
