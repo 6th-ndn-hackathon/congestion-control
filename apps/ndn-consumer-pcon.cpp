@@ -292,7 +292,7 @@ ConsumerPCON::cubicIncrease()
   if (m_window < m_sstresh) {
     // TODO: Maybe enable limited slow start:
 //    if (m_window < MAX_SSTRESH) {
-      m_window += 1;
+      m_window += 1.0;
 //    } else {
 //      // Limited Slow start:
 //      double K = m_window / (0.5 * MAX_SSTRESH);

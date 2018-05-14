@@ -6,10 +6,14 @@
 
 
 \begin{frame}{Motivation}
+
+Congestion Control crucial for high-performance simulations
+\pause
+
 \begin{itemize}
 \item NFD congestion detection doesn't work in ndnSIM\\ (no real TCP/UDP/Unix faces)
 \pause
-\item Tasks: Fix that. 
+\item[$\Rightarrow$] Task: Fix that. 
 %\begin{itemize}
 %\item Implement a ns-3 Queue based on CoDel that detects congestion and inserts congestion marks.
 %\item Map these congestion marks onto NDNLP/ns-3 packets.
@@ -29,7 +33,7 @@
 \begin{enumerate}
 \item \textbf{ndnSIM doesn't use real TCP or UDP faces.}\\
 $\Rightarrow$ NetDeviceTransport: override
-virtual function(s) for congestion control.
+virtual function(s) for congestion control (Junxiao's solution).
 \pause
 
 \item \textbf{CongestionMarks sent over NDNLP:} Already works! 
@@ -64,8 +68,9 @@ Very simple scenario:
 ConsumerWindow App: 
 
 \begin{itemize}
-\item On Data: $m_{cwnd}$++ (constant slow start!)
-\item On Timeout: $m_{cwnd} \leftarrow 2$
+\item On Data: $m_{cwnd}$++ \pause (exp. increase / constant slow start!)
+\pause
+\item On Timeout: $m_{cwnd} \leftarrow INITIAL\_CWND$ (2)
 \end{itemize}
 
 \pause
@@ -76,7 +81,7 @@ ConsumerWindow App:
 
 \begin{frame}{How ndnSIM performs right now}
 
-60,000 Timeouts!!!
+40,000 Timeouts!!!
 
 \includegraphics[width=\linewidth]{figs/cons2.png}
 
@@ -121,7 +126,7 @@ Even Shorter Sawtooths (about 7s)!
 
 \begin{frame}{Future Work}
 
-Congestion Detection via adapted CoDelQueue:
+Congestion Detection via \textbf{adapted CoDelQueue:}
 \begin{itemize}
 \item Worked well in ns3 3.23 (PCON simulation code)
 \pause
@@ -155,60 +160,14 @@ Mechanisms:
 \item \textbf{CUBIC \textgreater\ AIMD}
 \end{enumerate}
 
+\pause
+{\footnotesize
+\url{https://github.com/6th-ndn-hackathon/congestion-control}
+}
 
 \end{frame}
 
 
-
-%\begin{frame}{Experimental environment}
-%
-%Local topology:
-%
-%\begin{itemize}
-%\item UDP Tunnels \& TCP Tunnels
-%\item Ethernet \& WiFi
-%\end{itemize}
-%
-%\end{frame}
-%
-%\begin{frame}{Results (WiFi):}
-%
-%\textbf{UDP (both links):}\\[.3em]
-%\begin{tabular}{ l r l r }
-%\toprule
-%\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
-%\midrule
-%Without CC: & 60ms 	& 28.7 Mbps	 & 250 Retx \\
-%With CC: & 6-9ms 		& 26.0 Mbps		 & 0 Retx \\
-%\bottomrule
-%\end{tabular}
-%
-%\pause
-%\vspace*{1em}
-%
-%\textbf{TCP (both links):}\\[.3em]
-%\begin{tabular}{ l r l r }
-%\toprule
-%\textbf{Scenario} & \textbf{RTT}	& \textbf{Goodput} & \textbf{Retx} \\
-%\midrule
-%Without CC: & 115ms 	& 37 Mbps	 & 320 Retx \\
-%With CC: 		& 	7ms  	& 29 Mbps	 & 0 Retx \\
-%\bottomrule
-%\end{tabular}
-%
-%\vspace*{1em}
-%
-%\pause
-%Ethernet: Cong. signals can even give you a \textbf{higher goodput!}
-%
-%\end{frame}
-%
-%
-%\begin{frame}{Results (WiFi):}
-%
-%\includegraphics[width=\linewidth]{../results/screenshots.png}
-%
-%\end{frame}
 
 
 
