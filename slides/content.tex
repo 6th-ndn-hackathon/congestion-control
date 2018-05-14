@@ -27,15 +27,15 @@
 \begin{frame}{Solution Steps}
 
 \begin{enumerate}
-\item ndnSIM doesn't use real TCP or UDP faces.\\
-$\Rightarrow$ NetDeviceTransport: override of
+\item \textbf{ndnSIM doesn't use real TCP or UDP faces.}\\
+$\Rightarrow$ NetDeviceTransport: override
 virtual function(s) for congestion control.
 \pause
 
-\item CongestionMarks signaled via NDNLP: Already works! 
+\item \textbf{CongestionMarks sent over NDNLP:} Already works! 
 \pause
 
-\item Implement Consumer App that reacts to congestion marks (AIMD and TCP CUBIC.)
+\item \textbf{Implement Consumer App} that reacts to congestion marks (AIMD and TCP CUBIC)
 
 \end{enumerate}
 
@@ -49,9 +49,10 @@ Very simple scenario:
 \includegraphics[width=\linewidth]{figs/Figure_3.pdf}
 
 \begin{itemize}
-\item 1 Consumer
-\item 50 Mbit/s bottleneck capacity
-\item 40ms RTT
+\item 1 Consumer, Runtime: 40s 
+%\item 
+\item RTT: 40ms 
+\item Bottleneck capacity: 50 Mbit/s 
 \end{itemize}
 
 
@@ -64,7 +65,7 @@ ConsumerWindow App:
 
 \begin{itemize}
 \item On Data: $m_{cwnd}$++ (constant slow start!)
-\item On TimeOut: $m_{cwnd} \leftarrow 2$
+\item On Timeout: $m_{cwnd} \leftarrow 2$
 \end{itemize}
 
 \pause
@@ -122,7 +123,7 @@ Even Shorter Sawtooths (about 7s)!
 
 Congestion Detection via adapted CoDelQueue:
 \begin{itemize}
-\item Worked well in ns3 3.23
+\item Worked well in ns3 3.23 (PCON simulation code)
 \pause
 \item Doesn't work anymore in ns3 3.27 (current ndnSIM)
 \end{itemize}
@@ -135,11 +136,27 @@ NS-3 separated queuing in traffic-control module as:
 \end{frame}
 
 
-\begin{frame}{Summary} {
+\begin{frame}{Summary}
+Current ndnSIM consumer apps very limited! 
 
-TODO
+\begin{itemize}
+\item [$\Rightarrow$] \textbf{Works much better now!}
+\end{itemize}
 
-}
+\pause
+Mechanisms:
+\begin{enumerate}
+\item Slow start + Congestion avoidance
+\pause
+\item Fast recovery + Conservative Window Adaptation
+\pause
+\item \textbf{Explicit Congestion Marks}
+\pause
+\item \textbf{CUBIC \textgreater\ AIMD}
+\end{enumerate}
+
+
+\end{frame}
 
 
 
